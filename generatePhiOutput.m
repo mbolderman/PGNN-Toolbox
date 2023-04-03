@@ -79,7 +79,10 @@ output              = output(:, entriesTraPoints);
 
 if (reg_params{4} > 0)
     
-    %% Here the extrapolation data is made by gridding the space. Extension can be added by computing the cost function
+    %% Simplification
+    % A simplistic approach is implemented, which is obtained by gridding
+    % the acceleration, velocity, and position. The automatic procedure
+    % will be integrated in future versions.
     acc = linspace(-5, 5, 20);
     vel = linspace(-0.2, 0.2, 20);
     pos = [linspace(-0.18, -0.11, 10), linspace(0.11, 0.18, 10)];
@@ -97,8 +100,9 @@ if (reg_params{4} > 0)
             DeltaT = Ts*(ii-1);
             phi_E(ii,:) = phi_ext(1,:) - phi_ext(2,:)*DeltaT - 0.5*phi_ext(3,:)*DeltaT^2;
         end
+    else
+        phi_E = [];
     end
-    phi_E = [];
 else
     phi_E = [];
 end

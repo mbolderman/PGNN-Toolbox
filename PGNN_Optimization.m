@@ -45,7 +45,7 @@ function [thetahat, res_Costs, res_CostsVal] = PGNN_Optimization(output, phi, ou
 
 %% Perform training using lsqnonlin
 %options = optimoptions(@lsqnonlin, 'Algorithm', 'levenberg-marquardt', 'MaxFunctionEvaluations', 500*size(theta_0,1), 'MaxIterations', 1000);
-options = optimoptions(@lsqnonlin, 'Algorithm', 'levenberg-marquardt', 'Display', 'iter', 'MaxFunctionEvaluations', 100*size(theta_0,1), 'MaxIterations', 1000);
+options = optimoptions(@lsqnonlin, 'Algorithm', 'levenberg-marquardt', 'Display', 'iter', 'MaxFunctionEvaluations', 500*size(theta_0,1), 'MaxIterations', 1000);
 %options = optimoptions(@lsqnonlin, 'Algorithm', 'levenberg-marquardt', 'Display', 'iter', 'MaxFunctionEvaluations', 100*size(theta_0,1), 'MaxIterations', 1000, 'StepTolerance', 1e-12, 'FunctionTolerance', 0);
 [thetahat, resNorm] = lsqnonlin(@(theta) PGNN_CostFunction(theta, phi, output, phi_E, theta_PGstar, networkSize, n_params, lambda, reg_params, Ts, typeOfTransform), theta_0, [], [], options);
 
